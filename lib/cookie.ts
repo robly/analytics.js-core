@@ -53,7 +53,7 @@ Cookie.prototype.options = function(options?: CookieOptions) {
     // default to a year
     maxage: 31536000000,
     path: '/',
-    domain: domain,
+    domain,
     sameSite: 'Lax'
   });
 

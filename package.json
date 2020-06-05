@@ -12,7 +12,7 @@
   "main": "build/index.js",
   "scripts": {
     "test": "make test",
-    "lint": "eslint \"./{lib,test}/**/*.js\"",
+    "lint": "eslint \"./{lib,test}/**/*.js\" && tslint -c tslint.json \"./{lib,test}/**/*.ts\"",
     "format": "prettier-eslint --write --list-different \"./{lib,test}/**/*.{js,json,md}\"",
     "precommit": "lint-staged",
     "np": "np --no-publish",
@@ -98,6 +98,7 @@
     "sinon": "^1.7.3",
     "snyk": "^1.83.0",
     "ts-node": "^8.10.2",
+    "tslint": "^6.1.2",
     "typescript": "^3.9.3",
     "watchify": "^3.7.0"
   },

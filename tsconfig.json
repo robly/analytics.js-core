@@ -5,7 +5,10 @@
     "lib": ["ES5", "ES6", "ES7", "dom"],
     "allowJs": true,
     "outDir": "build",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
   },
   "exclude": ["node_modules", "*.md", "Makefile", "karma.*", "test"]
 }

@@ -4,10 +4,13 @@
  * Module dependencies.
  */
 
-var Entity = require('./entity');
-var bindAll = require('bind-all');
-var debug = require('debug')('analytics:group');
-var inherit = require('inherits');
+import Entity from './entity';
+import bindAll from 'bind-all';
+import Debug from 'debug';
+import inherit from 'inherits';
+
+// eslint-disable-next-line new-cap
+const debug = Debug('analytics.js:group');
 
 /**
  * Group defaults
@@ -29,7 +32,7 @@ Group.defaults = {
  * @param {Object} options
  */
 
-function Group(options) {
+function Group(options?: Object) {
   this.defaults = Group.defaults;
   this.debug = debug;
   Entity.call(this, options);

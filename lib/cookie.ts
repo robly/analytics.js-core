@@ -4,12 +4,15 @@
  * Module dependencies.
  */
 
-var bindAll = require('bind-all');
-var clone = require('./utils/clone');
-var cookie = require('@segment/cookie');
-var debug = require('debug')('analytics.js:cookie');
-var defaults = require('@ndhoule/defaults');
-var topDomain = require('@segment/top-domain');
+import bindAll from 'bind-all';
+import clone from './utils/clone';
+import cookie from '@segment/cookie';
+import Debug from 'debug';
+import defaults from '@ndhoule/defaults';
+import topDomain from '@segment/top-domain';
+
+// eslint-disable-next-line new-cap
+const debug = Debug('analytics.js:cookie');
 
 /**
  * Initialize a new `Cookie` with `options`.
@@ -17,7 +20,7 @@ var topDomain = require('@segment/top-domain');
  * @param {Object} options
  */
 
-function Cookie(options) {
+function Cookie(options?: Object) {
   this.options(options);
 }
 
@@ -31,12 +34,19 @@ function Cookie(options) {
  *   @field {Boolean} secure
  */
 
-Cookie.prototype.options = function(options) {
+interface CookieOptions {
+  maxage: number;
+  domain: string;
+  path: string;
+  secure: boolean;
+}
+
+Cookie.prototype.options = function(options?: CookieOptions) {
   if (arguments.length === 0) return this._options;
 
-  options = options || {};
+  options = options || ({} as CookieOptions);
 
-  var domain = '.' + topDomain(window.location.href);
+  let domain = '.' + topDomain(window.location.href);
   if (domain === '.') domain = null;
 
   this._options = defaults(options, {
@@ -70,7 +80,7 @@ Cookie.prototype.options = function(options) {
  * @return {Boolean} saved
  */
 
-Cookie.prototype.set = function(key, value) {
+Cookie.prototype.set = function(key: string, value: Object): boolean {
   try {
     value = window.JSON.stringify(value);
     cookie(key, value === 'null' ? null : value, clone(this._options));
@@ -87,7 +97,7 @@ Cookie.prototype.set = function(key, value) {
  * @return {Object} value
  */
 
-Cookie.prototype.get = function(key) {
+Cookie.prototype.get = function(key: string): Object {
   try {
     var value = cookie(key);
     value = value ? window.JSON.parse(value) : null;
@@ -104,7 +114,7 @@ Cookie.prototype.get = function(key) {
  * @return {Boolean} removed
  */
 
-Cookie.prototype.remove = function(key) {
+Cookie.prototype.remove = function(key: string): boolean {
   try {
     cookie(key, null, clone(this._options));
     return true;

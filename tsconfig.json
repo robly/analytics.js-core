@@ -2,8 +2,10 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "ES5",
+    "lib": ["ES5", "ES6", "ES7", "dom"],
     "allowJs": true,
-    "outDir": "build"
+    "outDir": "build",
+    "esModuleInterop": true
   },
   "exclude": ["node_modules", "*.md", "Makefile", "karma.*", "test"]
 }
